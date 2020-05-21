@@ -14,9 +14,9 @@ def get_email_from_cookie(cookie):
             allow_redirects=False)
         new_url = resp.headers.get("location")
         
-        ## Do an exception on allow_redirects for 13> redirects
+        ## Under-age accounts cannot access the devforum SSO
         if new_url and "web." in new_url:
-            resp, new_url = request(new_url)
+            return None, None
         
         return resp, new_url
         
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     email = get_email_from_cookie(cookie)
     
     if not email:
-        print("No email found, possibly unverified/banned?")
+        print("No email found, possibly unverified/underage/banned?")
         input()
     
     print("Email:", email)
