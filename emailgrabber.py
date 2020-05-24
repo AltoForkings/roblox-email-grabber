@@ -42,12 +42,13 @@ def get_email_from_cookie(cookie):
 
 
 if __name__ == "__main__":
-    cookie = input("Enter your cookie >> ")
+    cookie = input("Enter your cookie >> ").strip()
     email = get_email_from_cookie(cookie)
     
     if not email:
         print("No email found, possibly unverified/underage/banned?")
         input()
+        exit()
     
     print("Email:", email)
     input()
