@@ -31,12 +31,16 @@ def get_email_from_cookie(cookie):
         return
     
     ## Grab base64-encoded SSO data and decode it
-    data = new_url.split("/session/sso_login?sso=")[1].split("&")[0].replace("%3D", "=")
+    data = new_url.split("/session/sso_login?sso=")[1] \
+        .split("&")[0] \
+        .replace("%3D", "=")
     data = b64decode(data.encode("utf-8")).decode("utf-8")
     
     ## Grab email param and URL-decode it
     email = data.split("email=")[1].split("&")[0]
-    email = email.replace("%40", "@").replace("%2b", "+")
+    email = email \
+        .replace("%40", "@") \
+        .replace("%2b", "+")
     
     return email
 
